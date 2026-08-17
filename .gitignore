@@ -1,4 +1,5 @@
-
-server/config.py
-/server/venv
-/server/__pycache__
+client/node_modules
+client/.next
+server/node_modules
+server/dist
+.env

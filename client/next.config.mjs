@@ -1,11 +1,10 @@
-// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
     return [
       {
         source: "/api/:path*",
-        destination: "http://localhost:8080/api/:path*", // Adresse de votre serveur Flask
+        destination: `${process.env.API_URL ?? "http://localhost:8080"}/api/:path*`,
       },
     ];
   },
