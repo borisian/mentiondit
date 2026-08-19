@@ -1,10 +1,5 @@
 import { PLAN_LIMITS } from "../../context.js";
 
-/**
- * Ceilings here are the widest any plan allows; the service clamps further to the
- * caller's own limits. Keeping the schema permissive means a plan upgrade never
- * requires a schema change.
- */
 const MAX_THREADS = PLAN_LIMITS.pro.maxThreads;
 const MAX_COMMENTS = PLAN_LIMITS.pro.maxComments;
 

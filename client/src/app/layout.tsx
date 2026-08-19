@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Comment Hub — part de voix Reddit",
+  title: "Mentiondit — part de voix Reddit",
   description:
     "Mesurez ce que Reddit dit vraiment de votre marque et de vos concurrents : mentions, tonalité, évolution, sources.",
 };

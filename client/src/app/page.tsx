@@ -29,7 +29,7 @@ export default function Page() {
   return (
     <main className="mx-auto min-h-screen w-full max-w-4xl px-5 py-12">
       <header className="mb-6">
-        <h1 className="text-2xl font-semibold tracking-tight text-ink">Comment Hub</h1>
+        <h1 className="text-2xl font-semibold tracking-tight text-ink">Mentiondit</h1>
         <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-secondary">
           {MODE_COPY[mode].blurb}
         </p>

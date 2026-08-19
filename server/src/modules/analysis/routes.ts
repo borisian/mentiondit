@@ -4,7 +4,6 @@ import type { AnalyzeParams, AnalyzeResponse } from "../../core/types.js";
 import { analyzeSchema } from "./schema.js";
 import { NoThreadsFound, runAnalysis } from "./service.js";
 
-/** Fastify applies the schema defaults before the handler, so the body is complete. */
 export async function analysisRoutes(app: FastifyInstance): Promise<void> {
   app.post<{ Body: AnalyzeParams }>(
     "/api/analyze",

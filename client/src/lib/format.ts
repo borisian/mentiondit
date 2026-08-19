@@ -1,5 +1,3 @@
-// Intl constructors are expensive — building them per call measured ~200x slower
-// than reusing one, and a results render makes ~50 of these.
 const NUMBER = new Intl.NumberFormat("fr-FR");
 const MONTH = new Intl.DateTimeFormat("fr-FR", { month: "short", year: "2-digit" });
 const DATE = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "short", year: "numeric" });

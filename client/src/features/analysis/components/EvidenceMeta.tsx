@@ -7,7 +7,6 @@ interface Props {
   showSentiment?: boolean;
 }
 
-/** The attribution row under a quote: tonality, upvotes, sub, date, permalink. */
 export function EvidenceMeta({ item, showSentiment = true }: Props) {
   return (
     <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">

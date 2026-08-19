@@ -1,17 +1,5 @@
-/**
- * Discovery filter data — what a candidate entity must *not* be.
- *
- * The main mechanism lives in `discovery.ts` and is corpus-derived: a proper noun
- * is virtually never written in lower case, so `isCommonNoun` kills "Food",
- * "Amazing" and "No" without anyone maintaining a list. These sets exist only for
- * the classes that mechanism provably cannot see, because they are *always*
- * capitalised. When a bad result shows up, tune the ratio first — appending a word
- * here should be the last resort, not the reflex.
- */
-
-/** Demonyms, calendar names and jargon: real capitalised words, never the answer. */
 export const NOT_A_BRAND = new Set([
-  // Demonyms — describe a cuisine or origin, never the venue.
+  // Demonyms
   "american", "british", "canadian", "chinese", "french", "german", "greek", "indian",
   "italian", "japanese", "korean", "mexican", "persian", "polish", "portuguese",
   "russian", "spanish", "thai", "turkish", "vietnamese", "irish", "scottish", "dutch",
@@ -19,40 +7,27 @@ export const NOT_A_BRAND = new Set([
   "taiwanese", "cantonese", "sichuan", "nordic", "swedish", "danish", "norwegian",
   "brazilian", "argentine", "peruvian", "ethiopian", "lebanese", "moroccan", "asian",
   "european", "african", "latin", "caribbean", "mediterranean", "cajun", "creole",
-  // Calendar.
+  // Calendar
   "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
   "january", "february", "march", "april", "may", "june", "july", "august",
   "september", "october", "november", "december",
-  // Reddit and forum jargon.
+  // Forum jargon
   "reddit", "redditor", "redditors", "subreddit", "automod", "automoderator",
   "removed", "deleted", "tldr", "imo", "imho", "ymmv", "fwiw", "iirc", "afaik",
   "nsfw", "psa", "lol", "lmao", "wtf", "omg", "btw", "aka", "etc",
-  // Generic place vocabulary — capitalised inside addresses, never a venue alone.
+  // Place vocabulary
   "north", "south", "east", "west", "central", "downtown", "uptown", "midtown",
   "city", "town", "street", "avenue", "road", "district", "village", "area",
-  // Product-line filler that attaches to a real name ("Pro", "Max") but never stands alone.
+  // Product variants
   "pro", "max", "ultra", "plus", "mini", "lite", "gen",
-  // Frequent capitalised openers a small corpus may not see enough of in lower case.
+  // Sentence openers
   "the", "this", "that", "there", "they", "what", "when", "where", "which", "who",
   "how", "and", "but", "for", "not", "you", "your", "our", "its", "just", "also",
   "well", "yes", "yeah", "edit", "one", "two", "first", "last", "next", "even",
   "still", "because", "however", "though", "honestly", "personally", "actually",
 ]);
 
-/**
- * Countries and major cities.
- *
- * KNOWN TRADE-OFF: this set is a property of the word, not of the question, so it
- * is wrong whenever a place *is* the answer — "best city to visit in Europe" has
- * every valid answer deleted before counting. It earns its place anyway because
- * the corpus-derived filters cannot reach these: for "best ramen in Paris",
- * "Tokyo" and "Japan" appear in neither the query nor the thread titles, and
- * without this set they outrank every actual ramen shop. Revisit if the product
- * ever takes place-seeking questions seriously.
- *
- * Only exact single-word candidates are matched, so a venue named "Tokyo Ramen"
- * still comes through.
- */
+// Exact one-word exclusions; place answers are a known tradeoff.
 export const PLACES = new Set([
   "afghanistan", "argentina", "australia", "austria", "belgium", "brazil", "britain",
   "cambodia", "canada", "chile", "china", "colombia", "croatia", "cuba", "czechia",
@@ -77,7 +52,6 @@ export const PLACES = new Set([
   "warsaw", "zurich", "brooklyn", "manhattan", "queens", "bronx", "portland",
 ]);
 
-/** Words that carry no intent in a search query, used to score thread relevance. */
 export const QUERY_STOPWORDS = new Set([
   "best", "top", "good", "great", "better", "worth", "cheap", "recommend",
   "recommendation", "recommendations", "any", "some", "the", "and", "for", "with",

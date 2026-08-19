@@ -35,12 +35,9 @@ function truncate(text: string): string {
 }
 
 export function analyseBrands(comments: Comment[], brands: Brand[]): BrandResult[] {
-  // Indexed positionally rather than by name: two entities may share a name, and
-  // it keeps the hot loop free of map lookups.
   const accumulators = brands.map(emptyAccumulator);
 
   for (const comment of comments) {
-    // Only split a body once a brand actually matched — most comments match none.
     let sentences: string[] | null = null;
 
     brands.forEach((brand, index) => {

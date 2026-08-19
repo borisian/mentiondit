@@ -31,7 +31,6 @@ export function Timeline({ brands, months }: Props) {
       series,
       maxY,
       labels: months.map(formatMonth),
-      // Label density is capped so months never collide on narrow screens.
       labelStep: Math.ceil(months.length / 6),
     };
   }, [brands, months]);

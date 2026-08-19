@@ -3,11 +3,6 @@ import Fastify, { type FastifyError, type FastifyInstance } from "fastify";
 import { analysisRoutes } from "./modules/analysis/routes.js";
 import { healthRoutes } from "./modules/health.js";
 
-/**
- * Builds the server without binding a port, so tests and alternative entry points
- * can drive it. Cross-cutting plugins register first — authentication and rate
- * limiting belong in that block, ahead of the feature modules.
- */
 export async function buildApp(): Promise<FastifyInstance> {
   const app = Fastify({ logger: true });
 

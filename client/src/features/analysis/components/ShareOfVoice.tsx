@@ -5,7 +5,6 @@ import { Swatch } from "@/components/ui/Swatch";
 import { formatNumber } from "@/lib/format";
 import { seriesColor, type BrandResult } from "../types";
 
-/** Shared so the ranking and the tonality chart line up column-for-column. */
 export const METRIC_ROW = "grid grid-cols-[minmax(0,10rem)_1fr_auto] items-center gap-3";
 export const METRIC_VALUE = "w-28 text-right";
 
@@ -50,7 +49,6 @@ export function ShareOfVoice({ brands }: { brands: BrandResult[] }) {
               <div className="num text-xs text-muted">{formatNumber(brand.mentions)} mentions</div>
             </div>
 
-            {/* Anchored left so it never covers the value column of the rows above. */}
             <div className="tooltip -top-2 left-0 hidden -translate-y-full group-hover:block">
               <div className="mb-1 font-medium text-ink">{brand.name}</div>
               <dl className="num space-y-0.5 text-secondary">

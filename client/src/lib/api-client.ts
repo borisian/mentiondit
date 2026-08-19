@@ -1,7 +1,3 @@
-/**
- * The single outbound HTTP path. Authentication headers, 401 handling and quota
- * errors belong here when accounts land — no feature should call fetch directly.
- */
 export async function post<T>(path: string, body: unknown): Promise<T> {
   const response = await fetch(path, {
     method: "POST",

@@ -1,9 +1,3 @@
-/**
- * Mirror of server/src/core/types.ts. Kept by hand: the two packages have no
- * shared build, and the wire format is small. If it grows, promote it to a real
- * shared package rather than letting the copies drift.
- */
-
 export type Sentiment = "positive" | "neutral" | "negative";
 export type Timeframe = "month" | "year" | "all";
 export type Mode = "compare" | "recommend";
@@ -53,11 +47,6 @@ export interface AnalyzeResponse {
   suggestions: { name: string; mentions: number }[];
 }
 
-/**
- * Fixed slot order — an entity keeps its colour when the ranking reorders. Six
- * entries, matching MODE_PROFILE.compare.tracked on the server; recommend mode
- * returns more but renders as a list, without colour identity.
- */
 const SERIES = [
   "var(--series-1)",
   "var(--series-2)",

@@ -37,7 +37,7 @@ export function downloadCsv(result: AnalyzeResponse): void {
 
   const link = document.createElement("a");
   link.href = url;
-  link.download = `comment-hub-${result.topic.replace(/\W+/g, "-").toLowerCase()}.csv`;
+  link.download = `mentiondit-${result.topic.replace(/\W+/g, "-").toLowerCase()}.csv`;
   link.click();
   URL.revokeObjectURL(url);
 }

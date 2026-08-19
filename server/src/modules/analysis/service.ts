@@ -8,7 +8,6 @@ import type { AnalyzeParams, AnalyzeResponse, Comment } from "../../core/types.j
 import { fetchComments, mapLimit } from "../../providers/reddit.js";
 import { findThreads } from "../../providers/search.js";
 
-/** Extra candidates kept beyond the ranking, offered as "also mentioned". */
 const SPARE_CANDIDATES = 8;
 
 export class NoThreadsFound extends Error {
@@ -23,11 +22,6 @@ const parseSubreddits = (input: string): string[] =>
     .map((sub) => sub.replace(/^\/?r\//, "").trim())
     .filter(Boolean);
 
-/**
- * The whole pipeline, independent of transport. Quota checks belong immediately
- * before it (the Serper and Reddit fan-out is the expensive part) and usage
- * metering immediately after.
- */
 export async function runAnalysis(
   params: AnalyzeParams,
   context: RequestContext,
@@ -53,8 +47,6 @@ export async function runAnalysis(
   );
   const comments: Comment[] = batches.flat();
 
-  // Named entities are pinned; discovery fills the remaining slots so a query with
-  // no names still produces a ranking of whatever Reddit actually talks about.
   const pinned = profile.pinnable ? parseBrands(brandsInput, profile.tracked) : [];
   const candidates = discoverCandidates(comments, pinned, {
     limit: profile.tracked + SPARE_CANDIDATES,

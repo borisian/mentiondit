@@ -15,7 +15,6 @@
   --grid: #e1e0d9;
   --accent: #2a78d6;
 
-  /* Categorical slots — validated for CVD separation on this surface. */
   --series-1: #2a78d6;
   --series-2: #eb6834;
   --series-3: #1baf7a;
@@ -23,7 +22,6 @@
   --series-5: #e87ba4;
   --series-6: #008300;
 
-  /* Diverging pair for sentiment polarity, neutral gray midpoint. */
   --positive: #2a78d6;
   --neutral: #d6d5cf;
   --negative: #e34948;
@@ -76,7 +74,6 @@ body {
     @apply flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs
       text-secondary transition hover:border-accent hover:text-ink;
   }
-  /* Positioning is left to the call site; this is the surface only. */
   .tooltip {
     @apply pointer-events-none absolute z-10 rounded-lg border border-line bg-surface
       px-3 py-2 text-xs shadow-lg;

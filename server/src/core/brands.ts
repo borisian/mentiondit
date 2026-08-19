@@ -3,11 +3,9 @@ import { boundedAlternation } from "./text.js";
 export interface Brand {
   name: string;
   aliases: string[];
-  /** Global — for counting occurrences via matchAll. */
   pattern: RegExp;
-  /** Non-global twin — `test()` on a /g/ regex is stateful and alternates results. */
+  // `/g` makes `test()` stateful.
   matcher: RegExp;
-  /** False when the caller named it, true when discovery found it. */
   discovered: boolean;
 }
 
@@ -19,7 +17,6 @@ const build = (aliases: string[], discovered: boolean): Brand => ({
   discovered,
 });
 
-/** `Sony|WH-1000XM5, Bose|QuietComfort` -> two brands, aliases after the pipe. */
 export function parseBrands(input: string, cap: number): Brand[] {
   return input
     .split(",")

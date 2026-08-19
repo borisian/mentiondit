@@ -1,15 +1,10 @@
-/**
- * One definition of "a word", shared by every stage. Mention counting, subject
- * detection, common-noun detection and query filtering all have to agree on
- * where a word starts and ends, or they disagree about the same text.
- */
 const WORD = /[\p{L}\p{N}]+/gu;
 
 export function words(text: string): string[] {
   return text.toLowerCase().match(WORD) ?? [];
 }
 
-/** Name edges. `\b` lands in the wrong place on names like `WH-1000XM5` or `C++`. */
+// `\b` breaks on names like `WH-1000XM5` and `C++`.
 export const LEFT_EDGE = "(?<![\\p{L}\\p{N}])";
 export const RIGHT_EDGE = "(?![\\p{L}\\p{N}])";
 

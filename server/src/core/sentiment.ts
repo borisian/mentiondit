@@ -1,14 +1,6 @@
 import { words } from "./text.js";
 import type { Sentiment } from "./types.js";
 
-/**
- * Opinion lexicon tuned for product talk on Reddit. Deliberately small and
- * transparent: a scored sentence can always be traced back to the words that
- * moved it, which is the point of the product.
- *
- * This is the part most likely to be replaced by a model later — it is kept free
- * of any discovery logic so it can be swapped without touching entity extraction.
- */
 const POSITIVE = new Set([
   "amazing", "awesome", "beautiful", "best", "brilliant", "comfortable", "convenient",
   "durable", "excellent", "fantastic", "favorite", "flawless", "gem", "great", "happy",
@@ -39,7 +31,6 @@ const NEGATORS = new Set([
 
 const NEGATION_WINDOW = 3;
 
-/** Lexicon score with a short negation window — "not great" must not read positive. */
 export function scoreSentence(sentence: string): number {
   const tokens = words(sentence.replace(/['’]/g, ""));
   let score = 0;

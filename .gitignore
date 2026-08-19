@@ -3,3 +3,9 @@ client/.next
 server/node_modules
 server/dist
 .env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx

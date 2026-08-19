@@ -2,11 +2,6 @@ export type Sentiment = "positive" | "neutral" | "negative";
 
 export type Timeframe = "month" | "year" | "all";
 
-/**
- * "compare" ranks a known set of brands in a category.
- * "recommend" discovers what Reddit names in answer to a question — places,
- * venues, titles — where the entities are longer and the long tail matters.
- */
 export type Mode = "compare" | "recommend";
 
 export interface Thread {
@@ -36,9 +31,7 @@ export interface Evidence {
 
 export interface BrandResult {
   name: string;
-  /** True when discovery surfaced it rather than the caller naming it. */
   discovered: boolean;
-  /** Categorical palette slot, stable across filters so an entity keeps its colour. */
   slot: number;
   mentions: number;
   commentCount: number;
@@ -63,7 +56,6 @@ export interface AnalyzeParams {
 export interface AnalyzeResponse {
   topic: string;
   mode: Mode;
-  /** Which engine found the threads — Reddit search is the no-key fallback. */
   provider: "google" | "reddit";
   threadsScanned: number;
   commentsScanned: number;

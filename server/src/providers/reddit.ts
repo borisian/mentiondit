@@ -8,7 +8,6 @@ const TOKEN_URL = "https://www.reddit.com/api/v1/access_token";
 const IGNORED_AUTHORS = new Set(["AutoModerator", "[deleted]"]);
 
 let cachedToken: { value: string; expiresAt: number } | null = null;
-/** In-flight request, so a cold start does not send one token call per worker. */
 let pendingToken: Promise<string> | null = null;
 
 async function requestToken(): Promise<string> {
@@ -33,7 +32,6 @@ async function requestToken(): Promise<string> {
   }
 
   const data = (await res.json()) as { access_token: string; expires_in: number };
-  // Refresh a minute early so an in-flight batch never straddles expiry.
   cachedToken = {
     value: data.access_token,
     expiresAt: Date.now() + (data.expires_in - 60) * 1000,
@@ -128,10 +126,6 @@ export async function searchThreads(
   return usableThreads(await redditFetch<Listing<RawThread>>(path, params));
 }
 
-/**
- * Hydrates post ids coming from an external search engine. `/api/info` takes up
- * to 100 fullnames at once, so a whole result page costs a single call.
- */
 export async function fetchThreadsByIds(ids: string[]): Promise<Thread[]> {
   if (ids.length === 0) return [];
 
@@ -141,12 +135,6 @@ export async function fetchThreadsByIds(ids: string[]): Promise<Thread[]> {
   return usableThreads(listing);
 }
 
-/**
- * Reddit's own relevance sort drifts badly on long-tail queries: for "best brunch
- * in Toronto" it returns an 879-comment reality-TV thread that then dominates every
- * count. Keep only threads whose title carries a content word of the query, and
- * order the closest matches first — requiring *every* term empties the set.
- */
 export function filterByRelevance(threads: Thread[], topic: string): Thread[] {
   const terms = words(topic).filter(
     (word) => word.length > 2 && !QUERY_STOPWORDS.has(word)
@@ -168,7 +156,7 @@ function flatten(listing: Listing<RawComment> | "", thread: Thread, out: Comment
   if (!listing) return;
 
   for (const child of listing.data.children) {
-    if (child.kind !== "t1") continue; // "more" placeholders carry no text
+    if (child.kind !== "t1") continue;
     const raw = child.data;
     const body = raw.body ?? "";
 
@@ -205,7 +193,6 @@ export async function fetchComments(thread: Thread, limit: number): Promise<Comm
   return comments;
 }
 
-/** Bounded concurrency: Reddit allows 100 req/min, and bursts get throttled. */
 export async function mapLimit<T, R>(
   items: T[],
   limit: number,

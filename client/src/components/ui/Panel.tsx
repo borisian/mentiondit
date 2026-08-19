@@ -5,7 +5,6 @@ export const CARD = "rounded-card border border-line bg-surface";
 interface Props {
   title: string;
   description?: string;
-  /** Rendered on the header's right — legends, actions. */
   aside?: ReactNode;
   children: ReactNode;
 }

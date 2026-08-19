@@ -5,7 +5,6 @@ import { Swatch } from "@/components/ui/Swatch";
 import { SENTIMENT_COLOR, SENTIMENT_LABEL, type BrandResult, type Sentiment } from "../types";
 import { METRIC_ROW, METRIC_VALUE } from "./ShareOfVoice";
 
-/** Negative left, positive right — the bar reads as a spectrum. */
 const ORDER: Sentiment[] = ["negative", "neutral", "positive"];
 
 export function SentimentSplit({ brands }: { brands: BrandResult[] }) {
